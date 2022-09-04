@@ -1,4 +1,4 @@
-export const BorrowedBooks = () => {
+export const BorrowedBooksUser = () => {
     return (
         <div>
             <p>my borrowed books</p>

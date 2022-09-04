@@ -1,6 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
 
-export const User = () => {
+export const Admin = () => {
     return (
         <>
         <nav>
@@ -9,10 +9,7 @@ export const User = () => {
                     <Link to="library">Library</Link>
                 </li>
                 <li>
-                    <Link to="borrowed-book">Borrowed books</Link>
-                </li>
-                <li>
-                    <Link to="profile">My profile</Link>
+                    <Link to="borrowed-book">Borrowed books statistics</Link>
                 </li>
                 <li>
                     <button>Logout</button>
