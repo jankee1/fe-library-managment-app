@@ -6,10 +6,10 @@ export const User = () => {
         <nav>
             <ul>
                 <li>
-                    <Link to="book">All books</Link>
+                    <Link to="library">Library</Link>
                 </li>
                 <li>
-                    <Link to="borrowed-books">Borrowed books</Link>
+                    <Link to="borrowed-book">Borrowed books</Link>
                 </li>
                 <li>
                     <Link to="profile">My profile</Link>

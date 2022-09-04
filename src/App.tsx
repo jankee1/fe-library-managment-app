@@ -4,9 +4,9 @@ import {
 import './App.css';
 import { Login } from './components/auth/Login';
 import { Register } from './components/auth/Register';
-import { AllBooks } from "./components/books/AllBooks";
 import { BorrowedBooks } from "./components/borrowed-books/BorrowedBooks";
 import { Footer, Header } from './components/common/';
+import { Library } from "./components/library/Library";
 import { MainPage } from './components/main-page/MainPage';
 import { PageNotFound } from './components/page-not-found/PageNotFound';
 import { Profile } from "./components/user/Profile";
@@ -23,13 +23,13 @@ export const App = () => {
           <Route path="/login" element={<Login />} />
           
           <Route path="/user" element={<User />} > 
-            <Route index element={<BorrowedBooks />} />
-            <Route path="borrowed-books" element={<BorrowedBooks />} />
-            <Route path="book" element={<AllBooks />} />
+            <Route index element={<Library />} />
+            <Route path="library" element={<Library />} />
+            <Route path="borrowed-book" element={<BorrowedBooks />} />
             <Route path="profile" element={<Profile />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
-          
+
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       <Footer />
