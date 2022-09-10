@@ -1,2 +1,2 @@
-export * from './BorrowedBooksAdmin'
+export * from './BorrowedBooksStats'
 export * from './BorrowedBooksUser'
