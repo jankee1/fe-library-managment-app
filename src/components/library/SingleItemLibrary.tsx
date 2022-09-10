@@ -15,7 +15,7 @@ export const SingleItemLibrary = (props: SingleItemLibraryProps) => {
                 <td>{props.releaseDate}</td>
                 <td>{props.numberOfAvailableBooks}</td>
                 <td>
-                    {props.numberOfAvailableBooks > 0 && <Button text="Borrow" />}
+                    {props.numberOfAvailableBooks > 0 && <Button type="button" text="Borrow" />}
                 </td>
             </tr>
   );
