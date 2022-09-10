@@ -15,9 +15,14 @@ export const Profile = () => {
     const [firstName, setFirstName] = useState(user.firstName)
     const [lastName, setLastName] = useState(user.lastName)
 
+    const updateProfile = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+    }
+
     return (
         <div>
-            <form action="">
+            <form onSubmit={updateProfile}>
                 <p>Firstname</p>
                 <input type="text" name="firstName" id="" value={firstName} onChange={e => setFirstName(e.target.value)}/>
                 <p>Lastname</p>

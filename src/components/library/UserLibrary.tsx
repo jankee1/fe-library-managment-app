@@ -1,7 +1,7 @@
-import { SingleItemLibrary } from "./SingleItemLibrary";
+import { SingleItemUserLibrary } from "./SingleItemUserLibrary";
 
 
-export const Library = () => {
+export const UserLibrary = () => {
 
     const books = [
         {
@@ -51,7 +51,7 @@ export const Library = () => {
                 <tbody>
                     {
                         books.map(
-                            book => <SingleItemLibrary 
+                            book => <SingleItemUserLibrary 
                                 key={Math.floor(Math.random() * (1000000 - 1 + 1)) + 1} 
                                 title={book.title} 
                                 author={book.author} 

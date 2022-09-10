@@ -1,4 +1,4 @@
-import { Button } from "../common/Button";
+import { Button } from "../common";
 
 interface SingleItemLibraryProps {
     title: string;
@@ -7,7 +7,7 @@ interface SingleItemLibraryProps {
     numberOfAvailableBooks: number;
 }
 
-export const SingleItemLibrary = (props: SingleItemLibraryProps) => {
+export const SingleItemAdminLibrary = (props: SingleItemLibraryProps) => {
     return (
             <tr>
                 <td>{props.title}</td>
@@ -15,7 +15,8 @@ export const SingleItemLibrary = (props: SingleItemLibraryProps) => {
                 <td>{props.releaseDate}</td>
                 <td>{props.numberOfAvailableBooks}</td>
                 <td>
-                    {props.numberOfAvailableBooks > 0 && <Button type="button" text="Borrow" />}
+                    <Button type="button" text="Edit" />
+                    <Button type="button" text="Delete" />
                 </td>
             </tr>
   );
