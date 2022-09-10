@@ -1,4 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
+import { Button } from "../common/Button";
 
 export const User = () => {
     return (
@@ -15,7 +16,7 @@ export const User = () => {
                     <Link to="profile">My profile</Link>
                 </li>
                 <li>
-                    <button>Logout</button>
+                    <Button text="Logout"/>
                 </li>
             </ul>
         </nav>
