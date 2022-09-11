@@ -2,6 +2,7 @@ import { useState } from "react";
 import { formRegisterValidation } from "../../helpers/form-validation.helpers";
 import { RegisterInterface } from "../../types";
 import { Button } from "../common";
+import {USER_INPUT_EMAIL_MAX_LENGTH, USER_INPUT_FIRSTNAME_MAX_LENGTH, USER_INPUT_FIRSTNAME_MIN_LENGTH, USER_INPUT_PASSWORD_MAX_LENGTH} from 'types'
 
 export const Register = () => {
 
@@ -36,6 +37,8 @@ export const Register = () => {
               name="firstName" 
               required={true}
               pattern={"[A-Za-z]"}
+              minLength={USER_INPUT_FIRSTNAME_MIN_LENGTH}
+              maxLength={USER_INPUT_FIRSTNAME_MAX_LENGTH}
               placeholder="First name"
               onChange={handleChange}
             />
@@ -45,6 +48,8 @@ export const Register = () => {
               name="lastName" 
               required={true}
               pattern={"[A-Za-z]"}
+              minLength={USER_INPUT_FIRSTNAME_MIN_LENGTH}
+              maxLength={USER_INPUT_FIRSTNAME_MAX_LENGTH}
               placeholder="Last name"
               onChange={handleChange}
             />
@@ -53,6 +58,7 @@ export const Register = () => {
               type="email" 
               name="email" 
               required={true}
+              maxLength={USER_INPUT_EMAIL_MAX_LENGTH}
               placeholder="Email"
               onChange={handleChange}
             />
@@ -61,6 +67,7 @@ export const Register = () => {
               type="password" 
               name="password" 
               required={true}
+              maxLength={USER_INPUT_PASSWORD_MAX_LENGTH}
               placeholder="Password"
               onChange={handleChange}
             />
@@ -69,6 +76,7 @@ export const Register = () => {
               type="password" 
               name="repeatPassword" 
               required={true}
+              maxLength={USER_INPUT_PASSWORD_MAX_LENGTH}
               placeholder="Confirm password"
               onChange={handleChange}
             />

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { USER_INPUT_EMAIL_MAX_LENGTH, USER_INPUT_PASSWORD_MAX_LENGTH } from "types";
 import { LoginInterface } from "../../types";
 
 export const Login = () => {
@@ -26,6 +27,7 @@ export const Login = () => {
               name="email" 
               placeholder="email"
               required={true}
+              maxLength={USER_INPUT_EMAIL_MAX_LENGTH}
               onChange={handleChange}
             />
             <p>Password</p>
@@ -34,6 +36,7 @@ export const Login = () => {
               name="password" 
               placeholder="password"
               required={true}
+              maxLength={USER_INPUT_PASSWORD_MAX_LENGTH}
               onChange={handleChange}
             />
             <button type="submit">Login</button>

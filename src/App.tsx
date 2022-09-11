@@ -20,9 +20,13 @@ export const App = () => {
     <div className="App">
       <Header />
         <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<MainPage />} >
+            <Route index element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route path="login" element={<Login />} />  
+            <Route path="*" element={<PageNotFound />} />
+          </Route>
+          
           
           <Route path="/user" element={<User />} > 
             <Route index element={<UserLibrary />} />
