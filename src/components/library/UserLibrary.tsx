@@ -5,8 +5,8 @@ import { SingleItemUserLibrary } from "./SingleItemUserLibrary";
 
 export const UserLibrary = () => {
 
-    const {jwtAccessToken, setJwtAccessToken} = useContext(AuthContext);
-    console.log(jwtAccessToken)
+    const {authUser, setAuthUser} = useContext(AuthContext);
+    console.log(authUser)
     const books = [
         {
             title: "test",

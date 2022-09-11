@@ -1,11 +1,12 @@
 import React, { createContext, useState, Dispatch } from 'react';
+import { LoginResponse } from 'types';
 
 export const AuthContext = createContext<{
-  jwtAccessToken: string | null;
-  setJwtAccessToken: Dispatch<React.SetStateAction<string | null>>;
+  authUser: LoginResponse | null;
+  setAuthUser: Dispatch<React.SetStateAction<LoginResponse | null>>;
 }>({
-  jwtAccessToken: null,
-  setJwtAccessToken: () => {},
+  authUser: null,
+  setAuthUser: () => {},
 });
 
 interface Props {
@@ -13,10 +14,10 @@ interface Props {
 }
 
 export const AuthContextProvider = ({ children }: Props) => {
-  const [jwtAccessToken, setJwtAccessToken] = useState<string | null>(null);
+  const [authUser, setAuthUser] = useState<LoginResponse | null>(null);
 
   return (
-    <AuthContext.Provider value={{ jwtAccessToken, setJwtAccessToken }}>
+    <AuthContext.Provider value={{ authUser, setAuthUser }}>
       {children}
     </AuthContext.Provider>
     

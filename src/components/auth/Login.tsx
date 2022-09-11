@@ -8,7 +8,7 @@ import { AuthContext } from "../AuthProvider";
 export const Login = () => {
 
   const navigate = useNavigate();
-  const {jwtAccessToken, setJwtAccessToken} = useContext(AuthContext);
+  const {authUser, setAuthUser} = useContext(AuthContext);
 
   const [login, setLogin] = useState<LoginInterface>({
     email: '',
@@ -28,8 +28,7 @@ export const Login = () => {
     // formRegisterValidation(register)
     try {
       const response = await axiosPublic.post<LoginResponse>('/auth/login', login, {withCredentials: true})
-      console.log(response)
-      setJwtAccessToken(response.data.jwtAccessToken)
+      setAuthUser(()=> response.data)
       navigate(`/${response.data.role}`)
     } catch(e) {
       console.log(e)
