@@ -25,9 +25,6 @@ export const Register = () => {
     event.preventDefault();
     // formRegisterValidation(register)
 
-
-
-
   }
 
     return (
