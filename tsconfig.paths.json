@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+        "types": [
+          "../be-library-managment-app/src/types"
+        ]
+      }
+    }
+  }

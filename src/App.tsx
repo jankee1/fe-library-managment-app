@@ -1,6 +1,7 @@
 import {
   Route, Routes
 } from "react-router-dom";
+import { UserRole } from "../../be-library-managment-app/src/types/user";
 import './App.css';
 import { Admin } from "./components/admin/Admin";
 import { Login } from './components/auth/Login';
@@ -20,11 +21,15 @@ export const App = () => {
     <div className="App">
       <Header />
         <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<MainPage />} >
+            <Route index element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route path="login" element={<Login />} />  
+            <Route path="*" element={<PageNotFound />} />
+          </Route>
           
-          <Route path="/user" element={<User />} > 
+          
+          <Route path={`/${UserRole.User}`} element={<User />} > 
             <Route index element={<UserLibrary />} />
             <Route path="library" element={<UserLibrary />} />
             <Route path="borrowed-book" element={<BorrowedBooksUser />} />
@@ -32,7 +37,7 @@ export const App = () => {
             <Route path="*" element={<PageNotFound />} />
           </Route>
 
-          <Route path="/admin" element={<Admin />} > 
+          <Route path={`/${UserRole.Admin}`} element={<Admin />} > 
             <Route index element={<BorrowedBooksStats />} />
             <Route path="library" element={<AdminLibrary />} />
             <Route path="borrowed-book" element={<BorrowedBooksStats />} />
