@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { axiosPublic } from "../../api/axios";
-import { USER_INPUT_EMAIL_MAX_LENGTH, USER_INPUT_PASSWORD_MAX_LENGTH } from "types";
+import { LoginResponse, USER_INPUT_EMAIL_MAX_LENGTH, USER_INPUT_PASSWORD_MAX_LENGTH } from "types";
 import { LoginInterface } from "../../types";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../AuthProvider";
 
 export const Login = () => {
+
+  const navigate = useNavigate();
+  const {jwtAccessToken, setJwtAccessToken} = useContext(AuthContext);
 
   const [login, setLogin] = useState<LoginInterface>({
     email: '',
@@ -22,8 +27,10 @@ export const Login = () => {
     event.preventDefault();
     // formRegisterValidation(register)
     try {
-      const response = await axiosPublic.post('/auth/login', login)
+      const response = await axiosPublic.post<LoginResponse>('/auth/login', login, {withCredentials: true})
       console.log(response)
+      setJwtAccessToken(response.data.jwtAccessToken)
+      navigate(`/${response.data.role}`)
     } catch(e) {
       console.log(e)
     }
