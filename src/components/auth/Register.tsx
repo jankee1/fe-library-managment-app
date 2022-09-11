@@ -1,17 +1,11 @@
 import { useState } from "react";
+import { formRegisterValidation } from "../../helpers/form-validation.helpers";
+import { RegisterInterface } from "../../types";
 import { Button } from "../common";
 
 export const Register = () => {
 
-  interface RegisterData {
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-    repeatPassword: string;
-  }
-
-  const [register, setRegister] = useState<RegisterData>({
+  const [register, setRegister] = useState<RegisterInterface>({
     firstName: '',
     lastName: '',
     email: '',
@@ -29,27 +23,35 @@ export const Register = () => {
 
   const handleRegisterForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    // formRegisterValidation(register)
 
-    console.log(register)
+
+
+
   }
 
     return (
         <div >
           <form onSubmit={handleRegisterForm}>
+            <p>First name</p>
             <input 
               type="text" 
               name="firstName" 
               required={true}
+              pattern={"[A-Za-z]"}
               placeholder="First name"
               onChange={handleChange}
             />
+            <p>Last name</p>
             <input 
               type="text" 
               name="lastName" 
               required={true}
+              pattern={"[A-Za-z]"}
               placeholder="Last name"
               onChange={handleChange}
             />
+            <p>Email</p>
             <input 
               type="email" 
               name="email" 
@@ -57,6 +59,7 @@ export const Register = () => {
               placeholder="Email"
               onChange={handleChange}
             />
+            <p>Password</p>
             <input 
               type="password" 
               name="password" 
@@ -64,6 +67,7 @@ export const Register = () => {
               placeholder="Password"
               onChange={handleChange}
             />
+            <p>Confirm password</p>
             <input 
               type="password" 
               name="repeatPassword" 

@@ -1,14 +1,9 @@
-import { stringify } from "querystring";
 import { useState } from "react";
+import { LoginInterface } from "../../types";
 
 export const Login = () => {
 
-  interface LoginData {
-    email: string;
-    password: string
-  }
-
-  const [login, setLogin] = useState<LoginData>({
+  const [login, setLogin] = useState<LoginInterface>({
     email: '',
     password: ''
   });
@@ -25,6 +20,7 @@ export const Login = () => {
     return (
         <div className="login">
           <form action="">
+            <p>Email</p>
             <input 
               type="text" 
               name="email" 
@@ -32,6 +28,7 @@ export const Login = () => {
               required={true}
               onChange={handleChange}
             />
+            <p>Password</p>
             <input 
               type="password" 
               name="password" 
