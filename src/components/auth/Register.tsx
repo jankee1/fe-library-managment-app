@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { formRegisterValidation } from "../../helpers/form-validation.helpers";
 import { RegisterInterface } from "../../types";
 import { Button } from "../common";
 import {USER_INPUT_EMAIL_MAX_LENGTH, USER_INPUT_FIRSTNAME_MAX_LENGTH, USER_INPUT_FIRSTNAME_MIN_LENGTH, USER_INPUT_PASSWORD_MAX_LENGTH} from 'types'
+import { axiosPublic } from "../../api/axios";
+import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
+
+  const navigate = useNavigate();
 
   const [register, setRegister] = useState<RegisterInterface>({
     firstName: '',
@@ -22,9 +25,12 @@ export const Register = () => {
     });
   }
 
-  const handleRegisterForm = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleRegisterForm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // formRegisterValidation(register)
+    const response = await axiosPublic.post('/user', register)
+    console.log(response)
+    navigate('/login')
 
   }
 
@@ -36,7 +42,6 @@ export const Register = () => {
               type="text" 
               name="firstName" 
               required={true}
-              pattern={"[A-Za-z]"}
               minLength={USER_INPUT_FIRSTNAME_MIN_LENGTH}
               maxLength={USER_INPUT_FIRSTNAME_MAX_LENGTH}
               placeholder="First name"
@@ -47,7 +52,6 @@ export const Register = () => {
               type="text" 
               name="lastName" 
               required={true}
-              pattern={"[A-Za-z]"}
               minLength={USER_INPUT_FIRSTNAME_MIN_LENGTH}
               maxLength={USER_INPUT_FIRSTNAME_MAX_LENGTH}
               placeholder="Last name"

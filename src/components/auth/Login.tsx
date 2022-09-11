@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { axiosPublic } from "../../api/axios";
 import { USER_INPUT_EMAIL_MAX_LENGTH, USER_INPUT_PASSWORD_MAX_LENGTH } from "types";
 import { LoginInterface } from "../../types";
 
@@ -17,10 +18,22 @@ export const Login = () => {
     });
   }
 
+  const handleLoginForm = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    // formRegisterValidation(register)
+    try {
+      const response = await axiosPublic.post('/auth/login', login)
+      console.log(response)
+    } catch(e) {
+      console.log(e)
+    }
+  
+  }
+
 
     return (
         <div className="login">
-          <form action="">
+          <form onSubmit={handleLoginForm}>
             <p>Email</p>
             <input 
               type="text" 
