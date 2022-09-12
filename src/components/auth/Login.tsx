@@ -3,7 +3,7 @@ import { axiosPublic } from "../../api/axios";
 import { LoginResponse, USER_INPUT_EMAIL_MAX_LENGTH, USER_INPUT_PASSWORD_MAX_LENGTH } from "types";
 import { LoginInterface } from "../../types";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../AuthProvider";
+import { AuthContext } from "../../context/AuthProvider";
 
 export const Login = () => {
 
@@ -31,7 +31,7 @@ export const Login = () => {
       setAuthUser(()=> response.data)
       navigate(`/${response.data.role}`)
     } catch(e) {
-      console.log(e)
+      console.error(e)
     }
   
   }

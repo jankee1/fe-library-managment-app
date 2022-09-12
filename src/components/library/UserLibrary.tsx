@@ -1,12 +1,8 @@
-import { useContext } from "react";
-import { AuthContext } from "../AuthProvider";
 import { SingleItemUserLibrary } from "./SingleItemUserLibrary";
 
 
 export const UserLibrary = () => {
 
-    const {authUser, setAuthUser} = useContext(AuthContext);
-    console.log(authUser)
     const books = [
         {
             title: "test",
