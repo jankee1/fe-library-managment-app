@@ -1,7 +1,7 @@
 import { Link, Outlet } from "react-router-dom";
-import { Button } from "../common/Button";
+import { Button } from "../common";
 
-export const User = () => {
+export const AdminNav = () => {
     return (
         <>
             <nav>
@@ -10,17 +10,13 @@ export const User = () => {
                         <Link to="library">Library</Link>
                     </li>
                     <li>
-                        <Link to="borrowed-book">Borrowed books</Link>
+                        <Link to="borrowed-book">Borrowed books statistics</Link>
                     </li>
                     <li>
-                        <Link to="profile">My profile</Link>
-                    </li>
-                    <li>
-                        <Button type="button" text="Logout"/>
+                        <Button type="button" text="Logout" />
                     </li>
                 </ul>
             </nav>
-            <Outlet />
         </>
   );
 }
