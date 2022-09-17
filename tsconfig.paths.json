@@ -1,5 +1,8 @@
 {
     "compilerOptions": {
+      "strictPropertyInitialization": false,
+      "experimentalDecorators": true,
+      "allowJs": true,
       "baseUrl": ".",
       "paths": {
         "types": [
