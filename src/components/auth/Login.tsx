@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { axiosPublic } from "../../api/axios";
+import { publicAxios } from "../../api/axios";
 import { LoginResponse, USER_INPUT_EMAIL_MAX_LENGTH, USER_INPUT_PASSWORD_MAX_LENGTH } from "types";
 import { LoginInterface } from "../../types";
 import { useNavigate } from "react-router-dom";
@@ -27,7 +27,7 @@ export const Login = () => {
     event.preventDefault();
     // formRegisterValidation(register)
     try {
-      const response = await axiosPublic.post<LoginResponse>('/auth/login', login, {withCredentials: true})
+      const response = await publicAxios.post<LoginResponse>('/auth/login', login, {withCredentials: true})
       setAuthUser(()=> response.data)
       navigate(`/${response.data.role}`)
     } catch(e) {

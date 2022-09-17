@@ -2,7 +2,7 @@ import { useState } from "react";
 import { RegisterInterface } from "../../types";
 import { Button } from "../common";
 import {USER_INPUT_EMAIL_MAX_LENGTH, USER_INPUT_FIRSTNAME_MAX_LENGTH, USER_INPUT_FIRSTNAME_MIN_LENGTH, USER_INPUT_PASSWORD_MAX_LENGTH} from 'types'
-import { axiosPublic } from "../../api/axios";
+import { publicAxios } from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
@@ -28,7 +28,7 @@ export const Register = () => {
   const handleRegisterForm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // formRegisterValidation(register)
-    const response = await axiosPublic.post('/user', register)
+    const response = await publicAxios.post('/user', register)
     console.log(response)
     navigate('/login')
 
