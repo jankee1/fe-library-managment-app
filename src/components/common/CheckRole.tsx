@@ -1,9 +1,8 @@
 import { useContext, useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { UserRole } from "../../../../be-library-managment-app/src/types/user";
+import { UserRole } from "types";
 import { AuthContext } from "../../context/AuthProvider";
-import { AdminNav } from "../admin/AdminNav";
-import { UserNav } from "../user/UserNav";
+import { AdminNav, UserNav } from "./nav";
 
 interface Props {
     role: UserRole
@@ -25,6 +24,4 @@ export const CheckRole = (props: Props) => {
         {authUser?.role === UserRole.Admin && <AdminNav />}
         <Outlet />
     </>
-    
-    
 }

@@ -1,5 +1,5 @@
-import { Link, Outlet } from "react-router-dom";
-import { Button } from "../common";
+import { Link } from "react-router-dom";
+import { Logout } from "../../auth/Logout";
 
 export const AdminNav = () => {
     return (
@@ -13,7 +13,7 @@ export const AdminNav = () => {
                         <Link to="borrowed-book">Borrowed books statistics</Link>
                     </li>
                     <li>
-                        <Button type="button" text="Logout" />
+                        <Logout />
                     </li>
                 </ul>
             </nav>

@@ -1,6 +1,9 @@
+import { usePrivateAxios } from "../../hooks/usePrivateAxios";
 import { SingleBorrowedBookUserItem } from "./SingleBorrowedBookUserItem";
 
 export const BorrowedBooksUser = () => {
+
+    const privateAxios = usePrivateAxios()
     
     const borrowedBooks = [
         {
@@ -20,6 +23,12 @@ export const BorrowedBooksUser = () => {
             returnDate: "2022",
         }
     ]
+
+    const bb = async () => {
+        const { data } = await privateAxios.get('borrowed-books')
+        console.log(data)
+    }
+    bb();
 
     return (
         <div>
