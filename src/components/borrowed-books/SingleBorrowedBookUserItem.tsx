@@ -1,7 +1,10 @@
+import { usePrivateAxios } from "../../hooks/usePrivateAxios";
 import { BorrowedBookUserType } from "types";
-import { Button } from "../common/Button";
 
 export const SingleBorrowedBookUserItem = (props: BorrowedBookUserType) => {
+
+    const privateAxios = usePrivateAxios()
+
     return (
             <tr>
                 <td>{props.title}</td>
@@ -9,7 +12,7 @@ export const SingleBorrowedBookUserItem = (props: BorrowedBookUserType) => {
                 <td>{props.borrowDate}</td>
                 <td>{props.additionalFees ? props.additionalFees : "N / A"}</td>
                 <td>
-                    <Button type="button" text="Return book" />
+                    <button onClick={props.handleReturnBook}>Return book</button>
                 </td>
             </tr>
   );

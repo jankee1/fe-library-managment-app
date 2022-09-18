@@ -20,6 +20,15 @@ export const BorrowedBooksUser = () => {
         }
     }
 
+    const handleReturnBook = async (bookId: string) =>{
+        try {
+            const { data } = await privateAxios.delete(`borrowed-books/${bookId}`)
+            getBorrowedBooks()
+        } catch(e) {
+            console.error(e)
+        }
+    }
+
     useEffect( () => {
         void getBorrowedBooks();
     }, [])
@@ -33,15 +42,17 @@ export const BorrowedBooksUser = () => {
             <tr>
                 <th>Title</th>
                 <th>Author</th>
-                <th>Return date</th>
+                <th>Borrowed at</th>
                 <th>Fees</th>
                 <th>Action</th>
             </tr>
             </thead>
-                <tbody>
+                <tbody >
                     {borrowedBooks.map(
                         singleBorrowedBook => <SingleBorrowedBookUserItem 
-                            key={singleBorrowedBook.id} 
+                            handleReturnBook={() => handleReturnBook(singleBorrowedBook.bookId)}
+                            key={singleBorrowedBook.borrowId} 
+                            bookId={singleBorrowedBook.bookId} 
                             title={singleBorrowedBook.title} 
                             author={singleBorrowedBook.author} 
                             borrowDate={singleBorrowedBook.borrowDate} 
