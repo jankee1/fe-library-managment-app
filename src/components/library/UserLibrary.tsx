@@ -1,19 +1,28 @@
 import { useEffect, useState } from "react";
 import { usePrivateAxios } from "../../hooks/usePrivateAxios";
 import { SingleItemUserLibrary } from "./SingleItemUserLibrary";
-import { BookType } from "types"
+import { BookType, BorrowedBookUserType } from "types"
+import { getBorrowedBooks } from "../../helpers/get-borrowed-books.helper";
 
 
 export const UserLibrary = () => {
 
     const privateAxios = usePrivateAxios()
     const [booksInLibrary, setBooksInLibrary] = useState<BookType [] | []>([]);
+    const [borrowedBooks, setBorrowedBooks] = useState<BorrowedBookUserType [] | []>([])
     const [isLoaded, setIsLoaded] = useState(false);
 
     const getBooks = async (): Promise<void> => {
         try {
             const { data } = await privateAxios.get<BookType []>('book')
-            setBooksInLibrary(data)
+
+            let booksInLibraryWithCheckedStatus = [] as BookType[]
+
+            for(const book of data) {
+                borrowedBooks?.some((item: BorrowedBookUserType) => item.bookId === book.id) ? book.isBorrowed = true : book.isBorrowed = false;
+                booksInLibraryWithCheckedStatus.push(book)
+            }
+            setBooksInLibrary(booksInLibraryWithCheckedStatus)
             setIsLoaded(true);
         } catch(e) {
             console.error(e)
@@ -21,19 +30,29 @@ export const UserLibrary = () => {
         }
     }
 
+    const myBorrowedBooks = async (): Promise<void> => {
+        const myBooks = await getBorrowedBooks();
+
+        if(myBooks) {
+            setBorrowedBooks(myBooks)
+            setIsLoaded(true);
+        } else setIsLoaded(false);
+    }
+
     const borrowThisBook = async (bookId: string) => {
         try {
-            const { data } = await privateAxios.post('borrowed-books', {bookId})
-            console.log(data)
-            getBooks()
+            await privateAxios.post('borrowed-books', {bookId})
+            setIsLoaded(false)
         } catch(e) {
             console.error(e)
         }
     }
 
     useEffect( () => {
+        void myBorrowedBooks();
         void getBooks();
-    }, [])
+    }, [isLoaded])
+
 
     return (
         <div>
@@ -54,6 +73,7 @@ export const UserLibrary = () => {
                             booksInLibrary.map(
                                 (book: BookType) => <SingleItemUserLibrary 
                                     borrowThisBook={() => borrowThisBook(book.id)}
+                                    isBorrowed={book.isBorrowed}
                                     key={book.id} 
                                     title={book.title} 
                                     author={`${book.authorFirstName} ${book.authorLastName}`} 

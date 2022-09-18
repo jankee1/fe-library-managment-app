@@ -3,10 +3,12 @@ interface SingleItemLibraryProps {
     author: string;
     releaseDate: string;
     numberOfAvailableBooks: number;
+    isBorrowed: boolean;
     borrowThisBook: () => {}
 }
 
 export const SingleItemUserLibrary = (props: SingleItemLibraryProps) => {
+
     return (
             <tr>
                 <td>{props.title}</td>
@@ -14,7 +16,8 @@ export const SingleItemUserLibrary = (props: SingleItemLibraryProps) => {
                 <td>{props.releaseDate}</td>
                 <td>{props.numberOfAvailableBooks}</td>
                 <td>
-                    {props.numberOfAvailableBooks > 0 && <button onClick={props.borrowThisBook}>Borrow this book</button>}
+                    { !props.isBorrowed && props.numberOfAvailableBooks > 0 && <button onClick={props.borrowThisBook}>Borrow this book</button>}
+                    { props.isBorrowed && "Book already borrowed"}
                 </td>
             </tr>
   );
