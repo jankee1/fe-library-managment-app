@@ -1,60 +1,57 @@
+import { useEffect, useState } from "react";
+import { BorrowedBookUserType } from "types";
 import { usePrivateAxios } from "../../hooks/usePrivateAxios";
 import { SingleBorrowedBookUserItem } from "./SingleBorrowedBookUserItem";
 
 export const BorrowedBooksUser = () => {
 
     const privateAxios = usePrivateAxios()
-    
-    const borrowedBooks = [
-        {
-            title: "test",
-            author: "author test",
-            returnDate: "2022",
-            additionalFees: 4.5
-        },
-        {
-            title: "test",
-            author: "author test",
-            returnDate: "2022",
-        },
-        {
-            title: "test",
-            author: "author test",
-            returnDate: "2022",
-        }
-    ]
+    const [borrowedBooks, setBorrowedBooks] = useState<BorrowedBookUserType []>()
+    const [isLoaded, setIsLoaded] = useState(false);
 
-    const bb = async () => {
-        const { data } = await privateAxios.get('borrowed-books')
-        console.log(data)
+    const getBorrowedBooks = async (): Promise<void> => {
+        try {
+            const { data } = await privateAxios.get<BorrowedBookUserType []>('borrowed-books')
+            setBorrowedBooks(data)
+            setIsLoaded(true);
+        } catch(e) {
+            console.error(e)
+            setIsLoaded(false)
+        }
     }
-    bb();
+
+    useEffect( () => {
+        void getBorrowedBooks();
+    }, [])
 
     return (
         <div>
-        <table>
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Return date</th>
-            <th>Fees</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-            <tbody>
-                {
-                    borrowedBooks.map(
+        {!isLoaded && <p>loading...</p>}
+        {isLoaded && borrowedBooks &&
+            <table>
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Return date</th>
+                <th>Fees</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+                <tbody>
+                    {borrowedBooks.map(
                         singleBorrowedBook => <SingleBorrowedBookUserItem 
-                            key={Math.floor(Math.random() * (1000000 - 1 + 1)) + 1} 
+                            key={singleBorrowedBook.id} 
                             title={singleBorrowedBook.title} 
                             author={singleBorrowedBook.author} 
-                            returnDate={singleBorrowedBook.returnDate} 
-                            additionalFees={singleBorrowedBook.additionalFees} 
+                            borrowDate={singleBorrowedBook.borrowDate} 
+                            additionalFees={singleBorrowedBook.additionalFees ?? 0} 
                         />)
-                }
-            </tbody>
-        </table>
+                    }
+                </tbody>
+            </table>
+        }
+
     </div>
   );
 }

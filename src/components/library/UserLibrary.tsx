@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import { usePrivateAxios } from "../../hooks/usePrivateAxios";
 import { SingleItemUserLibrary } from "./SingleItemUserLibrary";
-import {Book} from "types"
+import { BookType } from "types"
 
 
 export const UserLibrary = () => {
 
     const privateAxios = usePrivateAxios()
-    const [booksInLibrary, setBooksInLibrary] = useState<Book [] | []>([]);
+    const [booksInLibrary, setBooksInLibrary] = useState<BookType [] | []>([]);
     const [isLoaded, setIsLoaded] = useState(false);
 
-    const getBooks = async () => {
+    const getBooks = async (): Promise<void> => {
         try {
-            const { data } = await privateAxios.get<Book []>('book')
+            const { data } = await privateAxios.get<BookType []>('book')
             setBooksInLibrary(data)
             setIsLoaded(true);
         } catch(e) {
@@ -42,8 +42,8 @@ export const UserLibrary = () => {
                     <tbody>
                         {
                             booksInLibrary.map(
-                                (book: Book) => <SingleItemUserLibrary 
-                                    key={Math.floor(Math.random() * (1000000 - 1 + 1)) + 1} 
+                                (book: BookType) => <SingleItemUserLibrary 
+                                    key={book.id} 
                                     title={book.title} 
                                     author={`${book.authorFirstName} ${book.authorLastName}`} 
                                     releaseDate={new Date(book.publishedOn).toDateString()} 
