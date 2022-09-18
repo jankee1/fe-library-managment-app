@@ -12,10 +12,11 @@ export const BorrowedBooksUser = () => {
 
     const myBorrowedBooks = async (): Promise<void> => {
         const myBooks = await getBorrowedBooks();
-        if(!myBooks) setIsLoaded(false);
-
-        myBooks && setBorrowedBooks(myBooks)
-        setIsLoaded(true);
+        
+        if(myBooks) {
+            setBorrowedBooks(myBooks)
+            setIsLoaded(true);
+        } else setIsLoaded(false);
     }
 
     const handleReturnBook = async (bookId: string) =>{
