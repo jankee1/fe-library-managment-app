@@ -1,66 +1,70 @@
+import { useEffect, useState } from "react";
+import { usePrivateAxios } from "../../hooks/usePrivateAxios";
 import { SingleItemUserLibrary } from "./SingleItemUserLibrary";
+import { BookType } from "types"
 
 
 export const UserLibrary = () => {
 
-    const books = [
-        {
-            title: "test",
-            author: "author test",
-            releaseDate: "2022",
-            numberOfAvailableBooks: 5
-        },
-        {
-            title: "test",
-            author: "author test",
-            releaseDate: "2022",
-            numberOfAvailableBooks: 5
-        },
-        {
-            title: "test",
-            author: "author test",
-            releaseDate: "2022",
-            numberOfAvailableBooks: 0
-        },
-        {
-            title: "test",
-            author: "author test",
-            releaseDate: "2022",
-            numberOfAvailableBooks: 5
-        },
-        {
-            title: "test",
-            author: "author test",
-            releaseDate: "2022",
-            numberOfAvailableBooks: 5
+    const privateAxios = usePrivateAxios()
+    const [booksInLibrary, setBooksInLibrary] = useState<BookType [] | []>([]);
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    const getBooks = async (): Promise<void> => {
+        try {
+            const { data } = await privateAxios.get<BookType []>('book')
+            setBooksInLibrary(data)
+            setIsLoaded(true);
+        } catch(e) {
+            console.error(e)
+            setIsLoaded(false)
         }
-    ]
+    }
+
+    const borrowThisBook = async (bookId: string) => {
+        try {
+            const { data } = await privateAxios.post('borrowed-books', {bookId})
+            console.log(data)
+            getBooks()
+        } catch(e) {
+            console.error(e)
+        }
+    }
+
+    useEffect( () => {
+        void getBooks();
+    }, [])
 
     return (
         <div>
-            <table>
-            <thead>
-            <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Date of release</th>
-                <th>In stock</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-                <tbody>
-                    {
-                        books.map(
-                            book => <SingleItemUserLibrary 
-                                key={Math.floor(Math.random() * (1000000 - 1 + 1)) + 1} 
-                                title={book.title} 
-                                author={book.author} 
-                                releaseDate={book.releaseDate} 
-                                numberOfAvailableBooks={book.numberOfAvailableBooks} 
-                            />)
-                    }
-                </tbody>
-            </table>
+            {!isLoaded && <p>loading...</p>}
+            {isLoaded && 
+                <table>
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Date of release</th>
+                    <th>In stock</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                    <tbody>
+                        {
+                            booksInLibrary.map(
+                                (book: BookType) => <SingleItemUserLibrary 
+                                    borrowThisBook={() => borrowThisBook(book.id)}
+                                    key={book.id} 
+                                    title={book.title} 
+                                    author={`${book.authorFirstName} ${book.authorLastName}`} 
+                                    releaseDate={new Date(book.publishedOn).toDateString()} 
+                                    numberOfAvailableBooks={book.numberOfAvailable} 
+                                />)
+                        }
+                    </tbody>
+                </table>
+            }
+            
         </div>
   );
 }
