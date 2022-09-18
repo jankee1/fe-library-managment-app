@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { usePrivateAxios } from "../../hooks/usePrivateAxios";
 import { SingleItemUserLibrary } from "./SingleItemUserLibrary";
 import { BookType, BorrowedBookUserType } from "types"
+import { getBorrowedBooks } from "../../helpers/get-borrowed-books.helper";
 
 
 export const UserLibrary = () => {
@@ -29,14 +30,12 @@ export const UserLibrary = () => {
         }
     }
 
-    const getBorrowedBooks = async (): Promise<void> => {
-        try {
-            const { data } = await privateAxios.get<BorrowedBookUserType []>('borrowed-books')
-            setBorrowedBooks(data)
-        } catch(e) {
-            console.error(e)
-            setIsLoaded(false)
-        }
+    const myBorrowedBooks = async (): Promise<void> => {
+        const myBooks = await getBorrowedBooks();
+        if(!myBooks) setIsLoaded(false);
+
+        myBooks && setBorrowedBooks(myBooks)
+        setIsLoaded(true);
     }
 
     const borrowThisBook = async (bookId: string) => {
@@ -49,7 +48,7 @@ export const UserLibrary = () => {
     }
 
     useEffect( () => {
-        void getBorrowedBooks();
+        void myBorrowedBooks();
         void getBooks();
     }, [isLoaded])
 

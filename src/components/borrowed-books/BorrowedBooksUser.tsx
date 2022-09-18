@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { getBorrowedBooks } from "../../helpers/get-borrowed-books.helper";
 import { BorrowedBookUserType } from "types";
 import { usePrivateAxios } from "../../hooks/usePrivateAxios";
 import { SingleBorrowedBookUserItem } from "./SingleBorrowedBookUserItem";
@@ -9,29 +10,26 @@ export const BorrowedBooksUser = () => {
     const [borrowedBooks, setBorrowedBooks] = useState<BorrowedBookUserType []>()
     const [isLoaded, setIsLoaded] = useState(false);
 
-    const getBorrowedBooks = async (): Promise<void> => {
-        try {
-            const { data } = await privateAxios.get<BorrowedBookUserType []>('borrowed-books')
-            setBorrowedBooks(data)
-            setIsLoaded(true);
-        } catch(e) {
-            console.error(e)
-            setIsLoaded(false)
-        }
+    const myBorrowedBooks = async (): Promise<void> => {
+        const myBooks = await getBorrowedBooks();
+        if(!myBooks) setIsLoaded(false);
+
+        myBooks && setBorrowedBooks(myBooks)
+        setIsLoaded(true);
     }
 
     const handleReturnBook = async (bookId: string) =>{
         try {
             const { data } = await privateAxios.delete(`borrowed-books/${bookId}`)
-            getBorrowedBooks()
+            setIsLoaded(false)
         } catch(e) {
             console.error(e)
         }
     }
 
     useEffect( () => {
-        void getBorrowedBooks();
-    }, [])
+        void myBorrowedBooks();
+    }, [isLoaded])
 
     return (
         <div>
