@@ -21,6 +21,16 @@ export const UserLibrary = () => {
         }
     }
 
+    const borrowThisBook = async (bookId: string) => {
+        try {
+            const { data } = await privateAxios.post('borrowed-books', {bookId})
+            console.log(data)
+            getBooks()
+        } catch(e) {
+            console.error(e)
+        }
+    }
+
     useEffect( () => {
         void getBooks();
     }, [])
@@ -43,6 +53,7 @@ export const UserLibrary = () => {
                         {
                             booksInLibrary.map(
                                 (book: BookType) => <SingleItemUserLibrary 
+                                    borrowThisBook={() => borrowThisBook(book.id)}
                                     key={book.id} 
                                     title={book.title} 
                                     author={`${book.authorFirstName} ${book.authorLastName}`} 
