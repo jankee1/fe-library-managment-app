@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { RegisterInterface } from "../../types";
+import { RegisterInterface } from "../../interfaces";
 import { Button } from "../common";
 import {USER_INPUT_EMAIL_MAX_LENGTH, USER_INPUT_FIRSTNAME_MAX_LENGTH, USER_INPUT_FIRSTNAME_MIN_LENGTH, USER_INPUT_PASSWORD_MAX_LENGTH} from 'types'
 import { publicAxios } from "../../api/axios";

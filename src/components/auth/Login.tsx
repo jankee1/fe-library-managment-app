@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { publicAxios } from "../../api/axios";
 import { LoginResponse, USER_INPUT_EMAIL_MAX_LENGTH, USER_INPUT_PASSWORD_MAX_LENGTH } from "types";
-import { LoginInterface } from "../../types";
+import { LoginInterface } from "../../interfaces";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 
