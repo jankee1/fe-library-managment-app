@@ -1,4 +1,4 @@
-import { RegisterInterface, LoginInterface } from '../types';
+import { RegisterInterface, LoginInterface } from '../interfaces';
 
 
 

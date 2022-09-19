@@ -1,58 +1,77 @@
 import { useContext, useEffect, useState } from "react";
-import { Button } from "../common/Button";
+import { Button } from "../common/";
 import { AuthContext } from "../../context/AuthProvider";
+import { FullNameInterface } from "../../interfaces";
+import { usePrivateAxios } from "../../hooks/usePrivateAxios";
+import { LoginResponse } from "types";
+import { SuccessMessage } from "../common/";
 
 export const Profile = () => {
 
-    const user = {
-        firstName: "Test name",
-        lastName: "Lastname test",
-        email: "test@email.com",
-        userSince: "2019",
-        borrowedBooks: 5,
-        feesTotal: 20
-    }
-    const {authUser} = useContext(AuthContext)
-    const [firstName, setFirstName] = useState<string>()
-    const [lastName, setLastName] = useState<string>()
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [fees, setFees] = useState<number>()
+    const {authUser, setAuthUser} = useContext(AuthContext)
+    const [fullName, setFullName] = useState<FullNameInterface>({
+        firstName: '',
+        lastName: '',
+    })
+    const [isFullNameChanged, setIsFullNameChanged] = useState(false)
+    const privateAxios = usePrivateAxios()
 
-    const updateProfile = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    const updateProfile = async (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): Promise<void> => {
+        e.preventDefault();
+        const value = e.target.value;
+        setFullName({
+            ...fullName,
+            [e.target.name]: value
+          });
+    }
+
+    const handleProfileForm = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
-    }
-
-    const totalFees = async () => {
-
-    }
+        // formRegisterValidation(register)
+        try {
+            await privateAxios.patch(`user/${authUser?.id}`, fullName)
+            const user = {
+                ...authUser,
+                firstName: fullName.firstName,
+                lastName: fullName.lastName,
+            } as LoginResponse
+            setAuthUser(user)
+            setIsFullNameChanged(true)
+        } catch(e) {console.error(e)}
+      }
 
     useEffect(() => {
-        setFirstName(authUser?.firstName)
-        setLastName(authUser?.lastName)
+        if(authUser) {
+            setFullName({
+                firstName: authUser.firstName,
+                lastName: authUser.lastName,
+              });
+        }
     },[])
+
+    useEffect(() => {
+        const timeId = setTimeout(() => {
+            setIsFullNameChanged(false)
+          }, 3000)
+          return () => clearTimeout(timeId)
+    }, [isFullNameChanged])
 
     return (
         <div>
-            {/* {!isLoaded && <p>loading...</p>} */}
-            {
-                <form onSubmit={updateProfile}>
-                    <p>Firstname</p>
-                    <input type="text" name="firstName" id="" value={firstName} onChange={e => setFirstName(e.target.value)}/>
-                    <p>Lastname</p>
-                    <input type="text" name="lastName" id="" value={lastName} onChange={e => setLastName(e.target.value)} />
-                    <p>Email</p>
-                    <p>{authUser?.email}</p>
-                    <p>Registration date</p>
-                    <p>{authUser && new Date(authUser.createdAt).toDateString()}</p>
-                    <p>Number of borrowed books</p>
-                    <p>{authUser?.bookedBooks}</p>
-                    <p>Total sum of fees</p>
-                    <p>{user.feesTotal}</p>
-                    <Button type="submit" text="Update profile" />
-                </form>
-            }
-
+            <form onSubmit={handleProfileForm}>
+                <p>Firstname</p>
+                <input type="text" name="firstName" id="" value={fullName.firstName} onChange={updateProfile}/>
+                <p>Lastname</p>
+                <input type="text" name="lastName" id="" value={fullName.lastName} onChange={updateProfile} />
+                <p>Email</p>
+                <p>{authUser?.email}</p>
+                <p>Registration date</p>
+                <p>{authUser && new Date(authUser.createdAt).toLocaleDateString()}</p>
+                <p>Total sum of fees</p>
+                <p>{authUser?.fees}</p>
+                <Button type="submit" text="Update profile" />
+                { isFullNameChanged && <SuccessMessage text="Your profile has been updated" /> }
+            </form>
         </div>
   );
 }
