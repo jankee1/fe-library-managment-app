@@ -20,18 +20,7 @@ export const AdminLibrary = () => {
         }
     }
 
-    const handleEdit = async (id: string) => {
-        console.log('editing a book', id)
 
-    }
-
-    const handleDelete = async (id: string) => {
-        console.log('deleting a book', id)
-        try{ 
-            await privateAxios.delete(`book/${id}`)
-            getBooks()
-        }catch(e) {console.error(e)}
-    }
 
     useEffect( () => {
         void getBooks();
@@ -60,11 +49,11 @@ export const AdminLibrary = () => {
                                 id={book.id} 
                                 key={book.id} 
                                 title={book.title} 
-                                author={`${book.authorFirstName} ${book.authorLastName}`} 
+                                authorFirstName={book.authorFirstName} 
+                                authorLastName={book.authorLastName}
                                 releaseDate={new Date(book.publishedOn).toDateString()} 
                                 numberOfAvailableBooks={book.numberOfAvailable} 
-                                edit={handleEdit}
-                                delete={handleDelete}
+                                setIsLoaded={setIsLoaded}
                             />)
                     }
                 </tbody>
