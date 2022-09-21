@@ -54,7 +54,6 @@ export const SingleItemAdminLibrary = (props: SingleItemLibraryProps) => {
             const date =  await privateAxios.patch(`book/${props.id}`, bookDetails)
             props.setIsLoaded(false)
             setIsLoaded(false)
-            console.log(bookDetails)
         }catch(e) {console.error(e)}
     }
 
@@ -66,7 +65,7 @@ export const SingleItemAdminLibrary = (props: SingleItemLibraryProps) => {
                 publishedOn: new Date(props.releaseDate) ,
                 title: props.title
             });
-            setIsLoaded(true)
+        setIsLoaded(true)
     },[isLoaded])
 
     return (
