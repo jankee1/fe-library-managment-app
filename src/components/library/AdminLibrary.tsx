@@ -1,39 +1,37 @@
+import { useEffect, useState } from "react";
+import { usePrivateAxios } from "../../hooks/usePrivateAxios";
+import { BookType } from "types";
 import { AdminCreateNewBook } from "./AdminCreateNewBook";
 import { SingleItemAdminLibrary } from "./SingleItemAdminLibrary";
 
 
 export const AdminLibrary = () => {
+    const privateAxios = usePrivateAxios()
+    const [booksInLibrary, setBooksInLibrary] = useState<BookType [] | []>([]);
+    const [isLoaded, setIsLoaded] = useState(false);
 
-    const books = [
-        {
-            title: "test",
-            author: "author test",
-            releaseDate: "2022",
-            numberOfAvailableBooks: 5
-        },
-        {
-            title: "test",
-            author: "author test",
-            releaseDate: "2022",
-            numberOfAvailableBooks: 5
-        },
-        {
-            title: "test",
-            author: "author test",
-            releaseDate: "2022",
-            numberOfAvailableBooks: 5
-        },
-        {
-            title: "test",
-            author: "author test",
-            releaseDate: "2022",
-            numberOfAvailableBooks: 5
+    const getBooks = async (): Promise<void> => {
+        setIsLoaded(false)
+        try {
+            const { data } = await privateAxios.get<BookType []>('book')
+            setBooksInLibrary(data)
+        } catch(e) {
+            console.error(e)
         }
-    ]
+    }
+
+
+
+    useEffect( () => {
+        void getBooks();
+        setIsLoaded(true)
+    }, [isLoaded])
 
     return (
         <div>
             <AdminCreateNewBook />
+            {!isLoaded && <p>loading...</p>}
+            {isLoaded && 
             <table>
             <thead>
             <tr>
@@ -46,17 +44,21 @@ export const AdminLibrary = () => {
             </thead>
                 <tbody>
                     {
-                        books.map(
+                        booksInLibrary.map(
                             book => <SingleItemAdminLibrary 
-                                key={Math.floor(Math.random() * (1000000 - 1 + 1)) + 1} 
+                                id={book.id} 
+                                key={book.id} 
                                 title={book.title} 
-                                author={book.author} 
-                                releaseDate={book.releaseDate} 
-                                numberOfAvailableBooks={book.numberOfAvailableBooks} 
+                                authorFirstName={book.authorFirstName} 
+                                authorLastName={book.authorLastName}
+                                releaseDate={new Date(book.publishedOn).toDateString()} 
+                                numberOfAvailableBooks={book.numberOfAvailable} 
+                                setIsLoaded={setIsLoaded}
                             />)
                     }
                 </tbody>
             </table>
+        }
         </div>
   );
 }
