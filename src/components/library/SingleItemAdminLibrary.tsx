@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { BookEdited } from "types";
 import { usePrivateAxios } from "../../hooks/usePrivateAxios";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 interface SingleItemLibraryProps {
     id: string;
@@ -31,6 +34,7 @@ export const SingleItemAdminLibrary = (props: SingleItemLibraryProps) => {
             ...bookDetails,
             [e.target.name]: value
           });
+          console.log(bookDetails)
     }
 
     const showEditForm = () => {
@@ -46,11 +50,8 @@ export const SingleItemAdminLibrary = (props: SingleItemLibraryProps) => {
 
     const handleEditForm = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log(bookDetails)
-
         try{ 
-            const datte =  await privateAxios.patch(`book/${props.id}`, bookDetails)
-            console.log(datte)
+            const date =  await privateAxios.patch(`book/${props.id}`, bookDetails)
             props.setIsLoaded(false)
         }catch(e) {console.error(e)}
     }
@@ -90,7 +91,11 @@ export const SingleItemAdminLibrary = (props: SingleItemLibraryProps) => {
                         <p>Author's last name</p>
                         <input type="text" name="authorLastName" id="" value={bookDetails.authorLastName} onChange={updateBookDetails} />
                         <p>Release date</p>
-                        <input type="date" name="publishedOn" id="" value={bookDetails.publishedOn.toLocaleDateString('en-CA')} onChange={updateBookDetails} />
+                        <DatePicker selected={bookDetails.publishedOn} onChange={(date) =>  {
+                            if(date === null)
+                            date = new Date()
+                            setBookDetails({...bookDetails, publishedOn: date})
+                        }} />
                         <p>In Stock</p>
                         <input type="number" name="numberOfAvailable" id="" value={bookDetails.numberOfAvailable} onChange={updateBookDetails} />
                         <button type="submit">Update book</button> 
