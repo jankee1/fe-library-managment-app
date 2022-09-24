@@ -109,6 +109,10 @@ export const SingleItemAdminLibrary = (props: SingleItemLibraryProps) => {
                                     setBookDetails({...bookDetails, publishedOn: date})
                                 }} 
                                 dateFormat="dd/MM/yyyy"
+                                minDate={new Date("01/01/1900")}
+                                maxDate={new Date()}
+                                showMonthYearDropdown
+                                dropdownMode= "select"
                             />
                             <p>In Stock</p>
                             <input type="number" name="numberOfAvailable" id="" min={1} value={bookDetails.numberOfAvailable} onChange={updateBookDetails} />

@@ -29,7 +29,7 @@ export const AdminLibrary = () => {
 
     return (
         <div>
-            <AdminCreateNewBook />
+            <AdminCreateNewBook setIsLoaded={setIsLoaded}/>
             {!isLoaded && <p>loading...</p>}
             {isLoaded && 
             <table>
