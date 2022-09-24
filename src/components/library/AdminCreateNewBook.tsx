@@ -1,7 +1,7 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
-import { usePrivateAxios } from "../../hooks/usePrivateAxios";
 import { BookNew } from "types";
+import { usePrivateAxios } from "../../hooks/usePrivateAxios";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -19,6 +19,7 @@ export const AdminCreateNewBook = (props: AdminCreateNewBookProps) => {
         publishedOn: new Date(),
         title: ''
     })
+
 
     const updateBookDetails = async (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): Promise<void> => {
         e.preventDefault();
@@ -61,7 +62,7 @@ export const AdminCreateNewBook = (props: AdminCreateNewBookProps) => {
                 <DatePicker selected={bookDetails.publishedOn} onChange={(date) =>  {
                     if(date === null)
                         date = new Date()
-                        setBookDetails({...bookDetails, publishedOn: date})
+                    setBookDetails({...bookDetails, publishedOn: date})
                     }} 
                     dateFormat="dd/MM/yyyy"
                     minDate={new Date("01/01/1900")}
