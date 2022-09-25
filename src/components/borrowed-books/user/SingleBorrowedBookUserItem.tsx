@@ -1,9 +1,6 @@
-import { usePrivateAxios } from "../../hooks/usePrivateAxios";
 import { BorrowedBookUserType } from "types";
 
 export const SingleBorrowedBookUserItem = (props: BorrowedBookUserType) => {
-
-    const privateAxios = usePrivateAxios()
 
     return (
             <tr>

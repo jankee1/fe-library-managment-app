@@ -39,7 +39,7 @@ export const UserLibrary = () => {
         } else setIsLoaded(false);
     }
 
-    const borrowThisBook = async (bookId: string) => {
+    const borrowThisBook = async (bookId: string): Promise<void> => {
         try {
             await privateAxios.post('borrowed-books', {bookId})
             setIsLoaded(false)
