@@ -5,7 +5,7 @@ import { UserRole } from "../../be-library-managment-app/src/types/user";
 import './App.css';
 import { Login } from './components/auth/Login';
 import { Register } from './components/auth/Register';
-import { BorrowedBooksStats, BorrowedBooksUser } from "./components/borrowed-books/";
+import { BorrowedBooksAdmin, BorrowedBooksUser } from "./components/borrowed-books/";
 import { Footer, Header } from './components/common/';
 import { CheckRole } from "./components/common/CheckRole";
 import { AdminLibrary } from "./components/library/AdminLibrary";
@@ -38,9 +38,9 @@ export const App = () => {
           </Route>
 
           <Route path={`/${UserRole.Admin}`} element={<CheckRole role={UserRole.Admin} />}> 
-            <Route index element={<BorrowedBooksStats />} />
+            <Route index element={<BorrowedBooksAdmin />} />
             <Route path="library" element={<AdminLibrary />} />
-            <Route path="borrowed-book" element={<BorrowedBooksStats />} />
+            <Route path="borrowed-book" element={<BorrowedBooksAdmin />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
 

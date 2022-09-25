@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { getBorrowedBooks } from "../../helpers/get-borrowed-books.helper";
+import { getBorrowedBooks } from "../../../helpers/get-borrowed-books.helper";
 import { BorrowedBookUserType } from "types";
-import { usePrivateAxios } from "../../hooks/usePrivateAxios";
+import { usePrivateAxios } from "../../../hooks/usePrivateAxios";
 import { SingleBorrowedBookUserItem } from "./SingleBorrowedBookUserItem";
 
 export const BorrowedBooksUser = () => {
