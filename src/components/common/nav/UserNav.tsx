@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 import { Logout } from "../../auth/Logout";
 
+import "./UserNav.css"
+
 export const UserNav = () => {
     return (
         <>
-            <nav>
+            <nav className="user-nav">
                 <ul>
                     <li>
                         <Link to="library">Library</Link>

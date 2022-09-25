@@ -23,7 +23,7 @@ export const BorrowersStatsSingleItem = (props: BorrowerForStats) => {
                     <td colSpan={4}>
                         {
                             props.borrowedBooksDetails.map(item => {
-                                return <ul>
+                                return <ul key={item.borrowId}>
                                     <ol>
                                         Title: {item.bookTitle}
                                         <li>

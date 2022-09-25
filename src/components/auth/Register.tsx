@@ -5,6 +5,8 @@ import {USER_INPUT_EMAIL_MAX_LENGTH, USER_INPUT_FIRSTNAME_MAX_LENGTH, USER_INPUT
 import { publicAxios } from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 
+import "./Register.css"
+
 export const Register = () => {
 
   const navigate = useNavigate();

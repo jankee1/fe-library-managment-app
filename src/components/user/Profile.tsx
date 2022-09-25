@@ -25,7 +25,7 @@ export const Profile = () => {
           });
     }
 
-    const handleProfileForm = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    const handleProfileForm = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         // formRegisterValidation(register)
         try {
