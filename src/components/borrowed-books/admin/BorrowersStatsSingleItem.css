@@ -1,0 +1,12 @@
+.borrowed-books-from-borrower {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+.borrowed-books-from-borrower ul,
+.borrowed-books-from-borrower ol,
+.borrowed-books-from-borrower li {
+    text-align: left;
+}
+.borrowed-books-from-borrower b {
+    font-size: 20px;
+}
