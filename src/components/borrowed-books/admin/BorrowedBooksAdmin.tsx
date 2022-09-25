@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { BorrowedBookItemForStats } from "types";
 import { usePrivateAxios } from "../../../hooks/usePrivateAxios";
 import { BorrowedBooksStats } from "./BorrowedBooksStats";
+import { BorrowersStats } from "./BorrowersStats";
 
 enum StatsSelection {
-    Books = "Borrowed books",
-    Users = "Borrowers"
+    BorrowedBooks = "Borrowed books",
+    Borrowers = "Borrowers"
 }
 
 export const BorrowedBooksAdmin = () => {
@@ -15,7 +16,7 @@ export const BorrowedBooksAdmin = () => {
     const [statsSelection, setStatsSelection] = useState<StatsSelection>()
     const [isLoaded, setIsLoaded] = useState(false);
 
-    const getBorrowedBooksForStats = async () =>{
+    const getBorrowedBooksForStats = async (): Promise<void> =>{
         try {
             const { data } = await privateAxios.get<BorrowedBookItemForStats[]>("borrowed-books/stats")
             setBorrowedBooksForStats(data)
@@ -23,10 +24,9 @@ export const BorrowedBooksAdmin = () => {
         } catch(e) {console.error(e)}
     }
 
-    const handleStatsSelection = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const handleStatsSelection = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
         if(Object.values(StatsSelection).includes(event.currentTarget.value as StatsSelection))
             setStatsSelection(event.currentTarget.value as StatsSelection)
-
     }
 
     useEffect(() => {
@@ -38,15 +38,18 @@ export const BorrowedBooksAdmin = () => {
         <>
             <form>
             `   <p>Select statistics</p>
-                <input type="radio" value={StatsSelection.Books} checked={statsSelection === StatsSelection.Books} onChange={handleStatsSelection}/> {StatsSelection.Books}
-                <input type="radio" value={StatsSelection.Users} checked={statsSelection === StatsSelection.Users} onChange={handleStatsSelection}/> {StatsSelection.Users}
+                <input type="radio" value={StatsSelection.BorrowedBooks} checked={statsSelection === StatsSelection.BorrowedBooks} onChange={handleStatsSelection}/> {StatsSelection.BorrowedBooks}
+                <input type="radio" value={StatsSelection.Borrowers} checked={statsSelection === StatsSelection.Borrowers} onChange={handleStatsSelection}/> {StatsSelection.Borrowers}
             </form>`
             
             {!isLoaded && <p>loading...</p>}
 
-            {isLoaded && borrowedBooksForStats && statsSelection === StatsSelection.Books &&
-
+            {isLoaded && borrowedBooksForStats && statsSelection === StatsSelection.BorrowedBooks &&
                 <BorrowedBooksStats booksForStats={borrowedBooksForStats}/>
+            }
+
+            {isLoaded && borrowedBooksForStats && statsSelection === StatsSelection.Borrowers &&
+                <BorrowersStats borrowersForStats={borrowedBooksForStats}/>
             }
         </>
   );

@@ -12,7 +12,7 @@ export const BorrowedBooksStats = (props: BorrowedBooksStatsProps) => {
 
     const [borrowedBooksForStats, setBorrowedBooksForStats] = useState<SingleBookItemDetailsForStats []>()
 
-    const filterBookDetailsForStats = (borrowedBooks : BorrowedBookItemForStats[]) => {
+    const filterBookDetailsForStats = (borrowedBooks : BorrowedBookItemForStats[]): void => {
 
         let booksArr: SingleBookItemDetailsForStats[] = [];
         let bookItem: SingleBookItemDetailsForStats = {
@@ -31,7 +31,7 @@ export const BorrowedBooksStats = (props: BorrowedBooksStatsProps) => {
                 bookItem.author = `${book.bookAuthorFirstName} ${book.bookAuthorLastName}`;
                 bookItem.numberOfBorrowed = borrowedBooks.filter(singleBook => singleBook.bookId === book.bookId).length;
                 bookItem.numberOfAvailable = book.bookNumberOfAvailable;
-                bookItem.feesSum = borrowedBooks.filter(singleItem => singleItem.bookId === book.bookId).map(singleItem => singleItem.userfees).reduce((a, b) => a + b, 0)
+                bookItem.feesSum = borrowedBooks.filter(singleItem => singleItem.bookId === book.bookId).map(singleItem => singleItem.userFeePerBook).reduce((a, b) => a + b, 0)
 
                 booksArr.push(bookItem)
 
@@ -56,24 +56,45 @@ export const BorrowedBooksStats = (props: BorrowedBooksStatsProps) => {
     return (
 
         <>
-            { borrowedBooksForStats &&
-                borrowedBooksForStats.map(singleItemForStats => <BorrowedBooksStatSingleItem
-                    key={singleItemForStats.bookId}
-                    bookId={singleItemForStats.bookId}
-                    author={singleItemForStats.author}
-                    title={singleItemForStats.title}
-                    numberOfBorrowed={singleItemForStats.numberOfBorrowed}
-                    numberOfAvailable={singleItemForStats.numberOfAvailable}
-                    feesSum={singleItemForStats.feesSum}
-                />)
-            }
-            { borrowedBooksForStats &&
-                <BorrowedBooksStatSummary 
-                    totalNumberOfBorrowed={borrowedBooksForStats.map(singleItem => singleItem.numberOfBorrowed).reduce((a, b) => a + b, 0)}
-                    totalNumberOfAvailable={borrowedBooksForStats.map(singleItem => singleItem.numberOfAvailable).reduce((a, b) => a + b, 0)}
-                    totalFeesSum={borrowedBooksForStats.map(singleItem => singleItem.feesSum).reduce((a, b) => a + b, 0)}
-                />
-            }
+            <table>
+                <thead>
+                    <th>
+                        <td>Title</td>
+                    </th>
+                    <th>
+                        <td>Author</td>
+                    </th>
+                    <th>
+                        <td>Number of borrowed books</td>
+                    </th>
+                    <th>
+                        <td>Number of available books</td>
+                    </th>
+                    <th>
+                        <td>Sum of fees</td>
+                    </th>
+                </thead>
+                <tbody>
+                    { borrowedBooksForStats &&
+                        borrowedBooksForStats.map(singleItemForStats => <BorrowedBooksStatSingleItem
+                            key={singleItemForStats.bookId}
+                            bookId={singleItemForStats.bookId}
+                            author={singleItemForStats.author}
+                            title={singleItemForStats.title}
+                            numberOfBorrowed={singleItemForStats.numberOfBorrowed}
+                            numberOfAvailable={singleItemForStats.numberOfAvailable}
+                            feesSum={singleItemForStats.feesSum}
+                        />)
+                    }
+                    { borrowedBooksForStats &&
+                        <BorrowedBooksStatSummary 
+                            totalNumberOfBorrowed={borrowedBooksForStats.map(singleItem => singleItem.numberOfBorrowed).reduce((a, b) => a + b, 0)}
+                            totalNumberOfAvailable={borrowedBooksForStats.map(singleItem => singleItem.numberOfAvailable).reduce((a, b) => a + b, 0)}
+                            totalFeesSum={borrowedBooksForStats.map(singleItem => singleItem.feesSum).reduce((a, b) => a + b, 0)}
+                        />
+                    }
+                </tbody>
+            </table>
         </>
   );
 }
