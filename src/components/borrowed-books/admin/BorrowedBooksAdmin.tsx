@@ -37,8 +37,8 @@ export const BorrowedBooksAdmin = () => {
     return (
 
         <>
-            <form>
-            `   <p>Select statistics</p>
+            <form className="stats-selection">
+            `   <h2>Select statistics</h2>
                 <input type="radio" value={StatsSelection.BorrowedBooks} checked={statsSelection === StatsSelection.BorrowedBooks} onChange={handleStatsSelection}/> {StatsSelection.BorrowedBooks}
                 <input type="radio" value={StatsSelection.Borrowers} checked={statsSelection === StatsSelection.Borrowers} onChange={handleStatsSelection}/> {StatsSelection.Borrowers}
             </form>`

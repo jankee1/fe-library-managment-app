@@ -14,6 +14,8 @@ body {
     grid-template-rows: auto 1fr auto;
     grid-template-columns: 100%;
     align-items: center;
+    overflow:auto;
+    background-size: cover;
 }
 input {
     background-color: rgb(196, 227, 255);
@@ -63,4 +65,7 @@ td {
 }
 th {
     border: 5px solid black;
+}
+.danger-btn {
+    background-color: rgb(255, 101, 101);
 }

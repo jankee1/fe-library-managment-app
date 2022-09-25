@@ -62,18 +62,12 @@ export const BorrowersStats = (props: BorrowersStatsProps) => {
         <>
             <table>
                 <thead>
-                    <th>
-                        <td>Full name</td>
-                    </th>
-                    <th>
-                        <td>Email</td>
-                    </th>
-                    <th>
-                        <td>Number of borrowed books</td>
-                    </th>
-                    <th>
-                        <td>Sum of fees</td>
-                    </th>
+                    <tr>
+                        <th>Full name</th>
+                        <th>Email</th>
+                        <th>Number of borrowed books</th>
+                        <th>Sum of fees</th>
+                    </tr>
                 </thead>
                 <tbody>
                     {
