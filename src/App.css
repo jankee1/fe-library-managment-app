@@ -17,6 +17,7 @@ body {
 }
 input {
     background-color: rgb(196, 227, 255);
+    text-align: center;
 }
 input, button {
     border-radius: 20px;

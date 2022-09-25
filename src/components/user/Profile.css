@@ -1,0 +1,11 @@
+.profile form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.profile .title {
+    font-size: 18px;
+    font-weight: bold;
+}

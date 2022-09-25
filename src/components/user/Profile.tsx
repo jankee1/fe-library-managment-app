@@ -6,6 +6,8 @@ import { usePrivateAxios } from "../../hooks/usePrivateAxios";
 import { LoginResponse } from "types";
 import { SuccessMessage } from "../common/";
 
+import "./Profile.css"
+
 export const Profile = () => {
 
     const {authUser, setAuthUser} = useContext(AuthContext)
@@ -57,17 +59,17 @@ export const Profile = () => {
     }, [isFullNameChanged])
 
     return (
-        <div>
+        <div className="profile">
             <form onSubmit={handleProfileForm}>
-                <p>Firstname</p>
+                <p className="title">Firstname</p>
                 <input type="text" name="firstName" id="" value={fullName.firstName} onChange={updateProfile}/>
-                <p>Lastname</p>
+                <p className="title">Lastname</p>
                 <input type="text" name="lastName" id="" value={fullName.lastName} onChange={updateProfile} />
-                <p>Email</p>
+                <p className="title">Email</p>
                 <p>{authUser?.email}</p>
-                <p>Registration date</p>
+                <p className="title">Registration date</p>
                 <p>{authUser && new Date(authUser.createdAt).toLocaleDateString()}</p>
-                <p>Total sum of fees</p>
+                <p className="title">Total sum of fees</p>
                 <p>{authUser?.fees}</p>
                 <Button type="submit" text="Update profile" />
                 { isFullNameChanged && <SuccessMessage text="Your profile has been updated" /> }
