@@ -31,6 +31,7 @@ export const BorrowedBooksAdmin = () => {
 
     useEffect(() => {
         getBorrowedBooksForStats()
+        setStatsSelection(StatsSelection.BorrowedBooks)
     },[])
 
     return (

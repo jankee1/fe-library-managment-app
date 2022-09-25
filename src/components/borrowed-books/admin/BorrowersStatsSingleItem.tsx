@@ -6,7 +6,7 @@ export const BorrowersStatsSingleItem = (props: BorrowerForStats) => {
 
     const [showBooksList, setShowBooksList] = useState(false);
 
-    const handleBooksListVisibility = () => {
+    const handleBooksListVisibility = (): void => {
         setShowBooksList(!showBooksList)
     }
 

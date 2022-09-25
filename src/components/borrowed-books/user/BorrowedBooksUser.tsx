@@ -19,7 +19,7 @@ export const BorrowedBooksUser = () => {
         } else setIsLoaded(false);
     }
 
-    const handleReturnBook = async (bookId: string) =>{
+    const handleReturnBook = async (bookId: string): Promise<void> =>{
         try {
             const { data } = await privateAxios.delete(`borrowed-books/${bookId}`)
             setIsLoaded(false)

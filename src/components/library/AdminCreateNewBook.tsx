@@ -30,7 +30,7 @@ export const AdminCreateNewBook = (props: AdminCreateNewBookProps) => {
           });
     }
 
-    const createBook = async (event: React.FormEvent<HTMLFormElement>) => {
+    const createBook = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault();
         try {
             await privateAxios.post('book', bookDetails)
@@ -39,7 +39,7 @@ export const AdminCreateNewBook = (props: AdminCreateNewBookProps) => {
         } catch(e){console.error(e)}
     }
 
-    const clearForm = () => {
+    const clearForm = (): void => {
         setBookDetails({
             authorFirstName: '',
             authorLastName: '',

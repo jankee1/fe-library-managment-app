@@ -37,18 +37,18 @@ export const SingleItemAdminLibrary = (props: SingleItemLibraryProps) => {
           });
     }
 
-    const showEditForm = () => {
+    const showEditForm = (): void => {
         setEditForm(!editForm)
     }
 
-    const handleDelete = async (id: string) => {
+    const handleDelete = async (id: string): Promise<void> => {
         try{ 
             await privateAxios.delete(`book/${id}`)
             props.setIsLoaded(false)
         }catch(e) {console.error(e)}
     }
 
-    const handleEditForm = async (event: React.FormEvent<HTMLFormElement>) => {
+    const handleEditForm = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault();
         try{ 
             const date =  await privateAxios.patch(`book/${props.id}`, bookDetails)

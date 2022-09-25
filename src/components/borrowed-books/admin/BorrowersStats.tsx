@@ -11,7 +11,7 @@ export const BorrowersStats = (props: BorrowersStatsProps) => {
 
     const [borrowersForStats, setBorrowersForStats] = useState<BorrowerForStats[]>()
 
-    const filterBorrowersDetailsForStats = (borrowersForStats : BorrowedBookItemForStats[]) => {
+    const filterBorrowersDetailsForStats = (borrowersForStats : BorrowedBookItemForStats[]): void => {
 
         let borrowersArr: BorrowerForStats[] = [];
         let borrowerItem: BorrowerForStats = {
