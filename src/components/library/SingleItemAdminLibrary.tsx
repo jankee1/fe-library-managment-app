@@ -4,6 +4,7 @@ import { usePrivateAxios } from "../../hooks/usePrivateAxios";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
+import "./SingleItemAdminLibrary.css"
 
 interface SingleItemLibraryProps {
     id: string;
@@ -86,7 +87,7 @@ export const SingleItemAdminLibrary = (props: SingleItemLibraryProps) => {
                     <td>{props.numberOfAvailableBooks}</td>
                     <td>
                         <button type="button" onClick={() => showEditForm()}>Edit</button>
-                        <button type="button" onClick={() => handleDelete(props.id)}>Delete</button>
+                        <button type="button" onClick={() => handleDelete(props.id)} className="danger-btn">Delete</button>
                     </td>
                 </tr>
             }
@@ -95,29 +96,32 @@ export const SingleItemAdminLibrary = (props: SingleItemLibraryProps) => {
         
                 <tr >
                     <td colSpan={5} >
-                        <form onSubmit={handleEditForm}>
-                            <p>Title</p>
-                            <input type="text" name="title" id="" value={bookDetails.title} onChange={updateBookDetails} />
-                            <p>Author's first name</p>
-                            <input type="text" name="authorFirstName" id="" value={bookDetails.authorFirstName} onChange={updateBookDetails} />
-                            <p>Author's last name</p>
-                            <input type="text" name="authorLastName" id="" value={bookDetails.authorLastName} onChange={updateBookDetails} />
-                            <p>Release date</p>
-                            <DatePicker selected={bookDetails.publishedOn} onChange={(date) =>  {
-                                    if(date === null)
-                                        date = new Date()
-                                    setBookDetails({...bookDetails, publishedOn: date})
-                                }} 
-                                dateFormat="dd/MM/yyyy"
-                                minDate={new Date("01/01/1900")}
-                                maxDate={new Date()}
-                                showMonthYearDropdown
-                                dropdownMode= "select"
-                            />
-                            <p>In Stock</p>
-                            <input type="number" name="numberOfAvailable" id="" min={1} value={bookDetails.numberOfAvailable} onChange={updateBookDetails} />
-                            <button type="submit">Update book</button> 
-                        </form>
+                        <div className="edit-form-container">
+                            <form onSubmit={handleEditForm} className="book-form-to-edit">
+                                <p>Title</p>
+                                <input type="text" name="title" id="" value={bookDetails.title} onChange={updateBookDetails} />
+                                <p>Author's first name</p>
+                                <input type="text" name="authorFirstName" id="" value={bookDetails.authorFirstName} onChange={updateBookDetails} />
+                                <p>Author's last name</p>
+                                <input type="text" name="authorLastName" id="" value={bookDetails.authorLastName} onChange={updateBookDetails} />
+                                <p>Release date</p>
+                                <DatePicker selected={bookDetails.publishedOn} onChange={(date) =>  {
+                                        if(date === null)
+                                            date = new Date()
+                                        setBookDetails({...bookDetails, publishedOn: date})
+                                    }} 
+                                    dateFormat="dd/MM/yyyy"
+                                    minDate={new Date("01/01/1900")}
+                                    maxDate={new Date()}
+                                    showMonthYearDropdown
+                                    dropdownMode= "select"
+                                    className="data-picker-input"
+                                />
+                                <p>In Stock</p>
+                                <input type="number" name="numberOfAvailable" id="" min={1} value={bookDetails.numberOfAvailable} onChange={updateBookDetails} />
+                                <button type="submit">Update book</button> 
+                            </form>
+                        </div>
                     </td>
                 </tr>
             

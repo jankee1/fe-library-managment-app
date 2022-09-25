@@ -5,6 +5,9 @@ import { LoginInterface } from "../../interfaces";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 
+
+import "./Login.css"
+
 export const Login = () => {
 
   const navigate = useNavigate();

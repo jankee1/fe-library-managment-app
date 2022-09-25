@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BorrowerForStats } from "src/interfaces";
 
+import "./BorrowersStatsSingleItem.css"
 
 export const BorrowersStatsSingleItem = (props: BorrowerForStats) => {
 
@@ -21,24 +22,28 @@ export const BorrowersStatsSingleItem = (props: BorrowerForStats) => {
             {showBooksList &&
                 <tr>
                     <td colSpan={4}>
-                        {
-                            props.borrowedBooksDetails.map(item => {
-                                return <ul>
-                                    <ol>
-                                        Title: {item.bookTitle}
-                                        <li>
-                                            Author: {item.authorFullName}
-                                        </li>
-                                        <li>
-                                            Borrowed since: {new Date(item.bookBorrowedAt).toLocaleDateString()}
-                                        </li>
-                                        <li>
-                                            Fees: {item.feeForBook}
-                                        </li>
-                                    </ol>
-                                </ul>
-                            })
-                        }
+                        <div className="borrowed-books-from-borrower">
+                            {
+                                props.borrowedBooksDetails.map(item => {
+                                    return <div key={item.borrowId} className="borrowed-books-from-borrower-single-element">
+                                        <ul>
+                                            <ol>
+                                                <b>Title:</b> {item.bookTitle}
+                                                <li>
+                                                    Author: {item.authorFullName}
+                                                </li>
+                                                <li>
+                                                    Borrowed since: {new Date(item.bookBorrowedAt).toLocaleDateString()}
+                                                </li>
+                                                <li>
+                                                    Fees: {item.feeForBook}
+                                                </li>
+                                            </ol>
+                                        </ul>
+                                    </div>
+                                })
+                            }
+                        </div>
                     </td>
                 </tr>
             }

@@ -1,0 +1,10 @@
+.user-nav li {
+    display: inline-block;
+    margin: 10px;
+}
+.user-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

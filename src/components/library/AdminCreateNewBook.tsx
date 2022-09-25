@@ -4,7 +4,7 @@ import { BookNew } from "types";
 import { usePrivateAxios } from "../../hooks/usePrivateAxios";
 
 import "react-datepicker/dist/react-datepicker.css";
-
+import "./AdminCreateNewBook.css"
 interface AdminCreateNewBookProps {
     setIsLoaded: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -50,8 +50,8 @@ export const AdminCreateNewBook = (props: AdminCreateNewBookProps) => {
     }
     
     return (
-        <>
-            <form onSubmit={createBook}>
+        <div className="new-book-form-container">
+            <form onSubmit={createBook} className="new-book-form">
                 <p>Title</p>
                 <input type="text" name="title" id="" value={bookDetails.title} onChange={updateBookDetails} />
                 <p>Author's first name</p>
@@ -72,9 +72,9 @@ export const AdminCreateNewBook = (props: AdminCreateNewBookProps) => {
                 />
                 <p>In Stock</p>
                 <input type="number" name="numberOfAvailable" id="" min={1} value={bookDetails.numberOfAvailable} onChange={updateBookDetails} />
-                <button type="submit">Create book</button> 
                 <button type="button" onClick={clearForm}>Clear form</button>
+                <button type="submit">Create book</button> 
             </form>
-        </>
+        </div>
   );
 }

@@ -1,0 +1,31 @@
+.edit-form-container {
+    margin: auto;
+    display: grid;
+    grid-template-columns: 20% 1fr 20%;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.book-form-to-edit {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    display: grid;
+    grid-template-columns: 0.7fr 0.3fr;
+    align-items: center;
+    justify-content: center;
+}
+
+.book-form-to-edit p {
+    font-size: 18px;
+    font-weight: bold;
+}
+.book-form-to-edit input, 
+.book-form-to-edit .data-picker-input {
+    width: 100%;
+}
+.book-form-to-edit button {
+    width: 100%;
+    grid-column: 2/3;
+    margin-left: 15px;
+}

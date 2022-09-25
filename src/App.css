@@ -1,1 +1,71 @@
+html {
+    height: 100vh;
+    width: 100%;
+}
+body { 
+    min-height:100vh;
+    position: relative;
+}
+.App {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: rgb(125, 194, 255);
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 100%;
+    align-items: center;
+    overflow:auto;
+    background-size: cover;
+}
+input {
+    background-color: rgb(196, 227, 255);
+    text-align: center;
+}
+input, button {
+    border-radius: 20px;
+    font-size: large;
+    padding: 5px 12px
+}
+button {
+    background-color:  rgb(27, 148, 255);
+    color: white;
+}
+a {
+    text-decoration: none;
+    background-color: rgb(196, 227, 255);
+    text-align: center;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 5px;
+    color: rgb(0, 102, 192);
+    font-weight: 900;
+}
+.logout-button {
+    padding: 8px;
+    margin: 5px;
+}
 
+.container {
+    height: 100%;
+}
+
+table thead tr {
+    font-size: 23px;
+    font-weight: bolder;
+}
+table {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    border-collapse: collapse; 
+}
+td {
+    height: 40px;
+    border: 2px solid black;
+}
+th {
+    border: 5px solid black;
+}
+.danger-btn {
+    background-color: rgb(255, 101, 101);
+}

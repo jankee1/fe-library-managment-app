@@ -4,6 +4,7 @@ import { SingleItemUserLibrary } from "./SingleItemUserLibrary";
 import { BookType, BorrowedBookUserType, DAYS_TO_BORROW_BOOK_FROM_LIBRARY, FEE_PER_DAY } from "types"
 import { getBorrowedBooks } from "../../helpers/get-borrowed-books.helper";
 
+import "./UserLibrary.css"
 
 export const UserLibrary = () => {
 
@@ -55,8 +56,8 @@ export const UserLibrary = () => {
 
 
     return (
-        <div>
-            <h3>Currently a book can be borrowed for {DAYS_TO_BORROW_BOOK_FROM_LIBRARY} days. Additional fees are charged - {FEE_PER_DAY} PLN for each day of delay in a book return</h3>
+        <div className="user-library">
+            <h3>Currently a book can be borrowed for {DAYS_TO_BORROW_BOOK_FROM_LIBRARY} days. Additional fee is charged - {FEE_PER_DAY} PLN - for each day of delay of a book return</h3>
             {!isLoaded && <p>loading...</p>}
             {isLoaded && 
                 <table>

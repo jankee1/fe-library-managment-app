@@ -15,6 +15,6 @@ export const Logout = () => {
         navigate('/')
     }
     return (
-        <button type="button" onClick={handleLogout}>Logout</button>
+        <button type="button" onClick={handleLogout} className="logout-button">Logout</button>
     );
 }

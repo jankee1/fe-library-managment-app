@@ -1,16 +1,21 @@
+
+import "./BorrowedBooksStatsSummary.css"
+
 interface BorrowedBooksStatSummaryProps {
     totalNumberOfBorrowed: number;
     totalNumberOfAvailable: number;
     totalFeesSum: number
 }
 
+
+
 export const BorrowedBooksStatSummary = (props: BorrowedBooksStatSummaryProps) => {
     return (
-        <tr>
+        <tr className="summary">
             <td colSpan={2}>Summary</td>
             <td>
                 {props.totalNumberOfBorrowed}
-            </td>
+            </td >
             <td>
                 {props.totalNumberOfAvailable}
             </td>

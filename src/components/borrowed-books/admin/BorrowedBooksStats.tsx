@@ -58,21 +58,13 @@ export const BorrowedBooksStats = (props: BorrowedBooksStatsProps) => {
         <>
             <table>
                 <thead>
-                    <th>
-                        <td>Title</td>
-                    </th>
-                    <th>
-                        <td>Author</td>
-                    </th>
-                    <th>
-                        <td>Number of borrowed books</td>
-                    </th>
-                    <th>
-                        <td>Number of available books</td>
-                    </th>
-                    <th>
-                        <td>Sum of fees</td>
-                    </th>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Number of borrowed books</th>
+                        <th>Number of available books</th>
+                        <th>Sum of fees</th>
+                    </tr>
                 </thead>
                 <tbody>
                     { borrowedBooksForStats &&
