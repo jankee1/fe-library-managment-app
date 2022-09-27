@@ -16,7 +16,7 @@ export const SingleItemUserLibrary = (props: SingleItemLibraryProps) => {
                 <td>{props.releaseDate}</td>
                 <td>{props.numberOfAvailableBooks}</td>
                 <td>
-                    { !props.isBorrowed && props.numberOfAvailableBooks > 0 && <button onClick={props.borrowThisBook}>Borrow this book</button>}
+                    { !props.isBorrowed && props.numberOfAvailableBooks > 0 && <button className="book-btn" onClick={props.borrowThisBook}>Borrow this book</button>}
                     { props.isBorrowed && "Book already borrowed"}
                 </td>
             </tr>

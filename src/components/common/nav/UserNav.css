@@ -8,3 +8,7 @@
     justify-content: center;
     align-items: center;
 }
+.user-nav a:hover {
+    background-color: rgb(27, 148, 255);
+    color: white;
+}

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Loader } from "../../../components/common/Loader";
 import { BorrowedBookItemForStats } from "types";
 import { usePrivateAxios } from "../../../hooks/usePrivateAxios";
 import { BorrowedBooksStats } from "./BorrowedBooksStats";
@@ -34,16 +35,23 @@ export const BorrowedBooksAdmin = () => {
         setStatsSelection(StatsSelection.BorrowedBooks)
     },[])
 
+    const x = false
+
     return (
 
         <>
             <form className="stats-selection">
             `   <h2>Select statistics</h2>
-                <input type="radio" value={StatsSelection.BorrowedBooks} checked={statsSelection === StatsSelection.BorrowedBooks} onChange={handleStatsSelection}/> {StatsSelection.BorrowedBooks}
-                <input type="radio" value={StatsSelection.Borrowers} checked={statsSelection === StatsSelection.Borrowers} onChange={handleStatsSelection}/> {StatsSelection.Borrowers}
+                    <label htmlFor={StatsSelection.BorrowedBooks}>
+                <input type="radio" id={StatsSelection.BorrowedBooks} value={StatsSelection.BorrowedBooks} checked={statsSelection === StatsSelection.BorrowedBooks} onChange={handleStatsSelection}/> {StatsSelection.BorrowedBooks}
+                </label>
+                <label htmlFor={StatsSelection.Borrowers}>
+                    <input type="radio" id={StatsSelection.Borrowers} value={StatsSelection.Borrowers} checked={statsSelection === StatsSelection.Borrowers} onChange={handleStatsSelection}/> {StatsSelection.Borrowers}
+                </label>
+                
             </form>`
             
-            {!isLoaded && <p>loading...</p>}
+            {!isLoaded && <Loader />}
 
             {isLoaded && borrowedBooksForStats && statsSelection === StatsSelection.BorrowedBooks &&
                 <BorrowedBooksStats booksForStats={borrowedBooksForStats}/>

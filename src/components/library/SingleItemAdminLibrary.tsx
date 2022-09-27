@@ -86,7 +86,7 @@ export const SingleItemAdminLibrary = (props: SingleItemLibraryProps) => {
                     <td>{props.releaseDate}</td>
                     <td>{props.numberOfAvailableBooks}</td>
                     <td>
-                        <button type="button" onClick={() => showEditForm()}>Edit</button>
+                        <button type="button" onClick={() => showEditForm()} className="book-btn">Edit</button>
                         <button type="button" onClick={() => handleDelete(props.id)} className="danger-btn">Delete</button>
                     </td>
                 </tr>

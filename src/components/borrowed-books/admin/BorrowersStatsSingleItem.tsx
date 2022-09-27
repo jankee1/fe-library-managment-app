@@ -16,7 +16,7 @@ export const BorrowersStatsSingleItem = (props: BorrowerForStats) => {
             <tr>
                 <td>{props.fullName}</td>
                 <td>{props.email}</td>
-                <td>{props.numberOfBorrowed} <button type="button" onClick={handleBooksListVisibility}>Show books</button> </td>
+                <td>{props.numberOfBorrowed} <button type="button" className="book-btn" onClick={handleBooksListVisibility}>Show books</button> </td>
                 <td>{props.feesSum}</td>
             </tr>
             {showBooksList &&
