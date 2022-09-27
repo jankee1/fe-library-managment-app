@@ -9,7 +9,7 @@ export const SingleBorrowedBookUserItem = (props: BorrowedBookUserType) => {
                 <td>{props.borrowDate}</td>
                 <td>{props.additionalFees ? props.additionalFees : "N / A"}</td>
                 <td>
-                    <button onClick={props.handleReturnBook}>Return book</button>
+                    <button onClick={props.handleReturnBook} className="book-btn">Return book</button>
                 </td>
             </tr>
   );

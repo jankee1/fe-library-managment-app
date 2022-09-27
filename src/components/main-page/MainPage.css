@@ -12,3 +12,8 @@
 .main-page div a {
     width: 70px;
 }
+.main-page a:hover {
+    background-color: rgb(27, 148, 255);
+    color: white;
+    margin-top: -3px;
+}

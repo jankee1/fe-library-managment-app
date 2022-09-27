@@ -44,6 +44,9 @@ a {
     padding: 8px;
     margin: 5px;
 }
+.logout-button:hover {
+    transform: rotate(10deg);
+}
 
 .container {
     height: 100%;
@@ -62,10 +65,27 @@ table {
 td {
     height: 40px;
     border: 2px solid black;
+    transition: all .4s ease;
+    -webkit-transition: all .4s ease;
+}
+td:hover {
+    background-color: rgb(101, 181, 252);;
 }
 th {
     border: 5px solid black;
+    transition: all .4s ease;
+    -webkit-transition: all .4s ease;
+}
+th:hover {
+    background-color: rgb(2, 114, 212);;
+    color: white;
 }
 .danger-btn {
-    background-color: rgb(255, 101, 101);
+    background-color: rgb(255, 115, 115);
+}
+.danger-btn:hover {
+    background-color: rgb(253, 60, 60);
+}
+.book-btn:hover {
+    background-color: rgb(2, 114, 212);;
 }
