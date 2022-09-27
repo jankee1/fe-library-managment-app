@@ -6,6 +6,7 @@
 }
 .loader-container h3 {
     font-size: 2rem;
+    color: black;
 }
 .loader {
     border: 16px solid #f3f3f3;

@@ -21,8 +21,6 @@ export const AdminLibrary = () => {
         }
     }
 
-
-
     useEffect( () => {
         void getBooks();
         setIsLoaded(true)
