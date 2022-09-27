@@ -3,6 +3,7 @@ import { getBorrowedBooks } from "../../../helpers/get-borrowed-books.helper";
 import { BorrowedBookUserType } from "types";
 import { usePrivateAxios } from "../../../hooks/usePrivateAxios";
 import { SingleBorrowedBookUserItem } from "./SingleBorrowedBookUserItem";
+import { Loader } from "../../../components/common/Loader";
 
 export const BorrowedBooksUser = () => {
 
@@ -34,7 +35,7 @@ export const BorrowedBooksUser = () => {
 
     return (
         <div>
-        {!isLoaded && <p>loading...</p>}
+        {!isLoaded && <Loader />}
         {isLoaded && borrowedBooks &&
             <table>
             <thead>

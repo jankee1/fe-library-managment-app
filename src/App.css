@@ -89,3 +89,6 @@ th:hover {
 .book-btn:hover {
     background-color: rgb(2, 114, 212);;
 }
+label {
+    cursor: pointer;
+}

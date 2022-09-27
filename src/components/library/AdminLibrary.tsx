@@ -3,6 +3,7 @@ import { usePrivateAxios } from "../../hooks/usePrivateAxios";
 import { BookType } from "types";
 import { AdminCreateNewBook } from "./AdminCreateNewBook";
 import { SingleItemAdminLibrary } from "./SingleItemAdminLibrary";
+import { Loader } from "../common/Loader";
 
 
 export const AdminLibrary = () => {
@@ -30,7 +31,7 @@ export const AdminLibrary = () => {
     return (
         <div>
             <AdminCreateNewBook setIsLoaded={setIsLoaded}/>
-            {!isLoaded && <p>loading...</p>}
+            {!isLoaded && <Loader />}
             {isLoaded && 
             <table>
             <thead>
