@@ -1,0 +1,18 @@
+.page-not-found{
+    background-color: rgb(255, 94, 94);
+    width: 80%;
+    min-height: 200px;
+    margin: 100px auto;
+    border-radius: 20px;
+}
+
+.page-not-found div{
+    display: flex;
+    flex-direction: column;
+}
+.page-not-found div h3 {
+    font-size: 3rem;
+}
+.page-not-found div p {
+    font-size: 2rem;
+}
